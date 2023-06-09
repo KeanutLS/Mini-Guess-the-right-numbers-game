@@ -1,10 +1,8 @@
 import random
-# I use the vs code terminal for this. No idea how it works elsewhere.
 
 def PickWrongNumberISDie(players):
-    
     print()
-    max_player_count = 5 #not used but too lazy to remove
+    max_player_count = 5
     eliminated_players = []
     chosen_numbers = []
     death_messages = [
@@ -32,31 +30,41 @@ def PickWrongNumberISDie(players):
         else:
             dangerous_number = available_numbers[0]
 
-        for player in players: #makes every non eliminated player available to choose a number with a list of all available numbers
+        for player in players:
             if player not in eliminated_players:
                 print(player + " can now choose a number.")
                 print("Available numbers:", available_numbers)
 
-                chosen_number = int(input("Enter a number: "))
+                chosen_input = input("Enter a number: ")
+                while chosen_input == "" or not chosen_input.isdigit():
+                    print("Invalid input! Please enter a valid number between 1 and 20.")
+                    chosen_input = input("Enter a number: ")
 
-                while chosen_number < 1 or chosen_number > 20 or chosen_number in chosen_numbers: #checks if the player chooses a correct number, else it would display a message
+                chosen_number = int(chosen_input)
+
+                while chosen_number < 1 or chosen_number > 20 or chosen_number in chosen_numbers:
                     if chosen_number < 1 or chosen_number > 20:
-                        print("Invalid number! Please choose a number between 1 and 10.")
+                        print("Invalid number! Please choose a number between 1 and 20.")
                     else:
                         print("Number already chosen! Please select another number.")
 
-                    chosen_number = int(input("Enter a number: "))
+                    chosen_input = input("Enter a number: ")
+                    while chosen_input == "" or not chosen_input.isdigit():
+                        print("Invalid input! Please enter a valid number between 1 and 20.")
+                        chosen_input = input("Enter a number: ")
+
+                    chosen_number = int(chosen_input)
 
                 chosen_numbers.append(chosen_number)
-                available_numbers.remove(chosen_number)  #remove chosen numbers when out of available numbers
+                available_numbers.remove(chosen_number)
                 print(player + " chose:", chosen_number)
                 print()
 
-                if chosen_number == dangerous_number: #this is to detect of player is dead
+                if chosen_number == dangerous_number:
                     print(player + " " + random.choice(death_messages))
                     eliminated_players.append(player)
                     chosen_numbers = []
-                    available_numbers = [num for num in range(1, 21) if num not in chosen_numbers]  # reset available numbers so you can use them again if someone dies
+                    available_numbers = [num for num in range(1, 21) if num not in chosen_numbers]
                     if len(eliminated_players) == len(players) - 1:
                         break
 
@@ -64,14 +72,14 @@ def PickWrongNumberISDie(players):
             break
 
         print("--------------------")
-     #checks if there is only 1 player left when other players dies
+    
     remaining_players = [player for player in players if player not in eliminated_players]
     if len(remaining_players) == 1:
         print("The winner is:", remaining_players[0])
     else:
         print("No winner. All players died.")
 
-# makes the list of player names that you give
+
 player_list = []
 print()
 print("Welcome to choose right or die. You will be able to choose a number, and if you choose the wrong number, you will die.")
@@ -84,4 +92,3 @@ while True:
     player_list.append(player_name)
 print()
 PickWrongNumberISDie(player_list)
-
