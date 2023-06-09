@@ -22,7 +22,7 @@ def PickWrongNumberISDie(players):
         if len(chosen_numbers) == 10:
             break
               
-        available_numbers = [num for num in range(1, 11) if num not in chosen_numbers]
+        available_numbers = [num for num in range(1, 21) if num not in chosen_numbers]
 
         if len(available_numbers) == 0:
             break
@@ -39,8 +39,8 @@ def PickWrongNumberISDie(players):
 
                 chosen_number = int(input("Enter a number: "))
 
-                while chosen_number < 1 or chosen_number > 10 or chosen_number in chosen_numbers: #checks if the player chooses a correct number, else it would display a message
-                    if chosen_number < 1 or chosen_number > 10:
+                while chosen_number < 1 or chosen_number > 20 or chosen_number in chosen_numbers: #checks if the player chooses a correct number, else it would display a message
+                    if chosen_number < 1 or chosen_number > 20:
                         print("Invalid number! Please choose a number between 1 and 10.")
                     else:
                         print("Number already chosen! Please select another number.")
