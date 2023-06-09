@@ -19,7 +19,7 @@ def PickWrongNumberISDie(players):
     ]
 
     while len(eliminated_players) < len(players):
-        if len(chosen_numbers) == 10:
+        if len(chosen_numbers) == 20:
             break
               
         available_numbers = [num for num in range(1, 21) if num not in chosen_numbers]
@@ -56,7 +56,7 @@ def PickWrongNumberISDie(players):
                     print(player + " " + random.choice(death_messages))
                     eliminated_players.append(player)
                     chosen_numbers = []
-                    available_numbers = [num for num in range(1, 11) if num not in chosen_numbers]  # reset available numbers so you can use them again if someone dies
+                    available_numbers = [num for num in range(1, 21) if num not in chosen_numbers]  # reset available numbers so you can use them again if someone dies
                     if len(eliminated_players) == len(players) - 1:
                         break
 
@@ -84,3 +84,4 @@ while True:
     player_list.append(player_name)
 print()
 PickWrongNumberISDie(player_list)
+
